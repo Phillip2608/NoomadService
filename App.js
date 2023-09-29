@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import { View, StyleSheet } from "react-native";
 import Navigator from "./src/Navigator";
 
