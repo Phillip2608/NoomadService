@@ -1,11 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 
-//Tudo para fazer as fonts funcionarem
-import * as SplashScreen from "expo-splash-screen";
-import { useFonts } from "expo-font";
-import { useCallback } from "react";
-
 //icones
 import FontAwesome from "@expo/vector-icons/FontAwesome5";
 
@@ -16,21 +11,8 @@ import commonStyles from "../commonStyles";
 import myDrawerItem from "./myDrawerItem";
 
 export default function CustomDrawerContent(props) {
-  const [fontsLoaded] = useFonts({
-    WorkSans_Bold: require("../../assets/fonts/WorkSans-Bold.ttf"),
-  });
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <DrawerContentScrollView
         {...props}
         contentContainerStyle={{
@@ -97,7 +79,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   username: {
-    fontFamily: commonStyles.fonts.WorkSans_Bold,
     color: commonStyles.colors.brancoPrincipal,
     fontSize: 20,
     marginLeft: 8,

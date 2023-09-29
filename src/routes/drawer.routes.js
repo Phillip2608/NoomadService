@@ -16,7 +16,7 @@ export default function DrawerRoutes() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
-      initialRouteName="Servicos"
+      initialRouteName="Services"
       screenOptions={{ drawerStyle: { width: "80%" } }}
     >
       <Drawer.Screen name="Conversations" component={Conversations} />
