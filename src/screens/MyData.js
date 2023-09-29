@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function Servicos() {
+export default function MyData() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Serviços</Text>
+      <Text style={styles.text}>Meus Dados</Text>
     </View>
   );
 }
