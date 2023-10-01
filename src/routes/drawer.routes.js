@@ -8,7 +8,6 @@ import Services from "../screens/Services";
 import Conversations from "../screens/Conversations";
 import MyData from "../screens/MyData";
 import Notifications from "../screens/Notifications";
-import commonStyles from "../commonStyles";
 
 const Drawer = createDrawerNavigator();
 
@@ -17,7 +16,11 @@ export default function DrawerRoutes() {
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       initialRouteName="Services"
-      screenOptions={{ drawerStyle: { width: "80%" } }}
+      screenOptions={{
+        drawerStyle: { width: "80%" },
+        drawerStatusBarAnimation: "fade",
+        drawerType: "front",
+      }}
     >
       <Drawer.Screen name="Conversations" component={Conversations} />
       <Drawer.Screen name="Services" component={Services} />

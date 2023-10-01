@@ -11,6 +11,11 @@ import commonStyles from "../commonStyles";
 import myDrawerItem from "./myDrawerItem";
 
 export default function CustomDrawerContent(props) {
+  function toggleScreen(name, params = null) {
+    props.navigation.jumpTo(name, params);
+    props.navigation.closeDrawer();
+  }
+
   return (
     <View style={styles.container}>
       <DrawerContentScrollView
@@ -30,36 +35,64 @@ export default function CustomDrawerContent(props) {
           title: "Conversas",
           subtitle: "Histórico de conversas",
           border: true,
+          toggleScreen: () => {
+            props.navigation.jumpTo("Conversations");
+            props.navigation.closeDrawer();
+          },
         })}
         {myDrawerItem({
           title: "Serviços",
           subtitle: "Visualizar novos serviços e agendamentos",
           border: true,
+          toggleScreen: () => {
+            props.navigation.jumpTo("Services");
+            props.navigation.closeDrawer();
+          },
         })}
         {myDrawerItem({
           title: "Notificações",
           subtitle: "Visualizar novas notificações",
           border: true,
+          toggleScreen: () => {
+            props.navigation.jumpTo("Notifications");
+            props.navigation.closeDrawer();
+          },
         })}
         {myDrawerItem({
           title: "Pagamentos",
           subtitle: "Formas de pagamento",
           border: true,
+          toggleScreen: () => {
+            props.navigation.jumpTo("");
+            props.navigation.closeDrawer();
+          },
         })}
         {myDrawerItem({
           title: "Endereço",
           subtitle: "Visualizar ou alterar meu endereço",
           border: true,
+          toggleScreen: () => {
+            props.navigation.jumpTo("");
+            props.navigation.closeDrawer();
+          },
         })}
         {myDrawerItem({
           title: "Assinatura Premium",
           subtitle: "Seja um membro premium na Noomad",
           border: true,
+          toggleScreen: () => {
+            props.navigation.jumpTo("");
+            props.navigation.closeDrawer();
+          },
         })}
         {myDrawerItem({
           title: "Meus Dados",
           subtitle: "Visualizar ou alterar meus dados pessoais",
           border: false,
+          toggleScreen: () => {
+            props.navigation.jumpTo("MyData");
+            props.navigation.closeDrawer();
+          },
         })}
       </DrawerContentScrollView>
     </View>

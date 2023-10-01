@@ -10,6 +10,7 @@ export default function myDrawerItem(props) {
         styles.contentItemDrawer,
         props.border === true ? styles.itemBorder : {},
       ]}
+      onPress={() => props.toggleScreen()}
     >
       <View style={styles.contentItem}>
         <View style={styles.contentTextItem}>
