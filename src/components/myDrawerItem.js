@@ -1,35 +1,15 @@
-import { useCallback } from "react";
 import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
-import { useFonts } from "expo-font";
 import FontAwesome from "@expo/vector-icons/FontAwesome5";
 
 import commonStyles from "../commonStyles";
-import * as SplashScreen from "expo-splash-screen";
-
-SplashScreen.preventAutoHideAsync();
 
 export default function myDrawerItem(props) {
-  const [fontsLoaded] = useFonts({
-    WorkSans_Regular: require("../../assets/fonts/WorkSans-Regular.ttf"),
-    WorkSans_Light: require("../../assets/fonts/WorkSans-Light.ttf"),
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
     <TouchableHighlight
       style={[
         styles.contentItemDrawer,
         props.border === true ? styles.itemBorder : {},
       ]}
-      onLayout={onLayoutRootView}
     >
       <View style={styles.contentItem}>
         <View style={styles.contentTextItem}>
@@ -44,7 +24,7 @@ export default function myDrawerItem(props) {
 
 const styles = StyleSheet.create({
   contentItemDrawer: {
-    marginTop:15,
+    marginTop: 15,
     marginLeft: 10,
     marginRight: 10,
   },
