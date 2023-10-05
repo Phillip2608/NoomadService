@@ -8,6 +8,8 @@ import * as SplashScreen from "expo-splash-screen";
 //sistema de navegação
 import Navigator from "./src/Navigator";
 
+import commonStyles from "./src/commonStyles";
+
 export default function App() {
   const [loadedFonts] = useFonts({
     Dela_Regular: require("./assets/fonts/DelaGothicOne-Regular.ttf"),
@@ -40,6 +42,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: commonStyles.colors.brancoPrincipal,
   },
 });

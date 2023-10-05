@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 
+import commonStyles from "../commonStyles";
+
 export default function Menu() {
   return (
     <View style={styles.container}>
@@ -13,9 +15,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: commonStyles.colors.azulPrincipal,
   },
   text: {
     fontSize: 20,
-    color: "#222",
+    color: "#FFF",
   },
 });
