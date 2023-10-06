@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 
@@ -8,9 +9,13 @@ import FontAwesome from "@expo/vector-icons/FontAwesome5";
 import commonStyles from "../commonStyles";
 
 //Componentes adicionais
-import myDrawerItem from "./myDrawerItem";
+import MyDrawerItem from "./MyDrawerItem";
 
 export default function CustomDrawerContent(props) {
+  useEffect(() => {
+    props.navigation.openDrawer();
+  }, []);
+
   function toggleScreen(name, params = null) {
     props.navigation.jumpTo(name, params);
     props.navigation.closeDrawer();
@@ -31,69 +36,18 @@ export default function CustomDrawerContent(props) {
 
           <Text style={styles.username}>Luiz Phillip</Text>
         </View>
-        {myDrawerItem({
-          title: "Conversas",
-          subtitle: "Histórico de conversas",
-          border: true,
-          toggleScreen: () => {
-            props.navigation.jumpTo("Conversations");
-            props.navigation.closeDrawer();
-          },
-        })}
-        {myDrawerItem({
-          title: "Serviços",
-          subtitle: "Visualizar novos serviços e agendamentos",
-          border: true,
-          toggleScreen: () => {
-            props.navigation.jumpTo("Services");
-            props.navigation.closeDrawer();
-          },
-        })}
-        {myDrawerItem({
-          title: "Notificações",
-          subtitle: "Visualizar novas notificações",
-          border: true,
-          toggleScreen: () => {
-            props.navigation.jumpTo("Notifications");
-            props.navigation.closeDrawer();
-          },
-        })}
-        {myDrawerItem({
-          title: "Pagamentos",
-          subtitle: "Formas de pagamento",
-          border: true,
-          toggleScreen: () => {
-            props.navigation.jumpTo("");
-            props.navigation.closeDrawer();
-          },
-        })}
-        {myDrawerItem({
-          title: "Endereço",
-          subtitle: "Visualizar ou alterar meu endereço",
-          border: true,
-          toggleScreen: () => {
-            props.navigation.jumpTo("");
-            props.navigation.closeDrawer();
-          },
-        })}
-        {myDrawerItem({
-          title: "Assinatura Premium",
-          subtitle: "Seja um membro premium na Noomad",
-          border: true,
-          toggleScreen: () => {
-            props.navigation.jumpTo("");
-            props.navigation.closeDrawer();
-          },
-        })}
-        {myDrawerItem({
-          title: "Meus Dados",
-          subtitle: "Visualizar ou alterar meus dados pessoais",
-          border: false,
-          toggleScreen: () => {
-            props.navigation.jumpTo("MyData");
-            props.navigation.closeDrawer();
-          },
-        })}
+        <MyDrawerItem
+          title="Conversas"
+          subtitle="Histórico de conversas"
+          border={true}
+          toggleScreen={() => toggleScreen("Conversations")}
+        />
+        <MyDrawerItem
+          title="Meus Dados"
+          subtitle="Visualizar dados pessoais"
+          border={true}
+          toggleScreen={() => toggleScreen("MyData")}
+        />
       </DrawerContentScrollView>
     </View>
   );
@@ -102,6 +56,7 @@ export default function CustomDrawerContent(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    zIndex: 100,
     backgroundColor: commonStyles.colors.azulPrincipal,
   },
   contentUser: {

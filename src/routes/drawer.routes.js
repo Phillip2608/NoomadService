@@ -17,9 +17,7 @@ export default function DrawerRoutes() {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       initialRouteName="Services"
       screenOptions={{
-        drawerStyle: { width: "80%" },
-        drawerStatusBarAnimation: "fade",
-        drawerType: "front",
+        drawerStyle: { width: "100%" },
       }}
     >
       <Drawer.Screen name="Conversations" component={Conversations} />

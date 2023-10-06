@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome5";
 
 import commonStyles from "../commonStyles";
 
-export default function myDrawerItem(props) {
+export default function MyDrawerItem(props) {
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       style={[
         styles.contentItemDrawer,
         props.border === true ? styles.itemBorder : {},
@@ -19,7 +19,7 @@ export default function myDrawerItem(props) {
         </View>
         <FontAwesome name="chevron-right" style={styles.icon} size={20} />
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 

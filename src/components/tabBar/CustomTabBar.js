@@ -121,7 +121,9 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
               />
             </View>
 
-            <Text style={[isBlue, styles.label]}>{label !== "AddService" ? label : ""}</Text>
+            <Text style={[isBlue, styles.label]}>
+              {label !== "AddService" ? label : ""}
+            </Text>
           </TouchableOpacity>
         );
       })}
@@ -150,8 +152,8 @@ const styles = StyleSheet.create({
     position: "relative",
     bottom: 34,
   },
-  label:{
+  label: {
     position: "relative",
     bottom: 20,
-  }
+  },
 });
