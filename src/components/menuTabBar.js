@@ -1,45 +1,28 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-
 import FontAwesome from "@expo/vector-icons/FontAwesome5";
-import commonStyles from "../../commonStyles";
 
-export default function CustomTabBar({ state, descriptors, navigation }) {
+import commonStyles from "../commonStyles";
+export default function MenuTabBar({ state, descriptors, navigation }) {
   const isBlue = state.routes.map((route, index) => {
     const isFocused = state.index === index;
-    return (route.name === "Home" && isFocused) ||
-      (route.name === "AddService" && isFocused)
+
+    return (route.name === "index" && isFocused) ||
+      (route.name === "addService" && isFocused)
       ? { color: commonStyles.colors.brancoPrincipal }
-      : route.name === "Menu" && isFocused
+      : route.name === "menuProfile" && isFocused
       ? { color: commonStyles.colors.pretoPrincipal }
       : {};
   });
-
-  const btnFocus = {
-    backgroundColor: commonStyles.colors.rosaPrincipal,
-    color: commonStyles.colors.brancoPrincipal,
-  };
-
-  const btnNotFocus = {
-    backgroundColor: commonStyles.colors.azulPrincipal,
-    color: commonStyles.colors.brancoPrincipal,
-  };
-
   return (
     <View
       style={[
-        {
-          flexDirection: "row",
-          width: "100%",
-          height: 75,
-          justifyContent: "center",
-        },
+        styles.tabBar,
         state.routes.map((route, index) => {
           const isFocused = state.index === index;
-
-          return (route.name === "Home" && isFocused) ||
-            (route.name === "AddService" && isFocused)
+          return (route.name === "index" && isFocused) ||
+            (route.name === "addService" && isFocused)
             ? { backgroundColor: commonStyles.colors.azulPrincipal }
-            : route.name === "Menu" && isFocused
+            : route.name === "menuProfile" && isFocused
             ? { backgroundColor: commonStyles.colors.brancoPrincipal }
             : {};
         }),
@@ -47,6 +30,7 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
     >
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
+
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
@@ -63,7 +47,7 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
             canPreventDefault: true,
           });
 
-          if (!isFocused && !event.defaultPrevented) {
+          if (!isFocused && !event.defaultPrevent) {
             navigation.navigate({ name: route.name, merge: true });
           }
         };
@@ -81,48 +65,48 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             onPress={onPress}
-            key={route.key}
             onLongPress={onLongPress}
+            key={route.key}
             style={[
-              { alignItems: "center", justifyContent: "center" },
-              route.name === "Home" && { width: 50 },
-              route.name === "Menu" && { width: 50 },
-              route.name === "AddService" && { width: 100 },
+              { justifyContent: "center", alignItems: "center" },
+              route.name === "index" || route.name === "menuProfile"
+                ? { width: 50 }
+                : { width: 100 },
             ]}
           >
             <View
               style={[
                 isFocused
-                  ? { backgroundColor: btnFocus.backgroundColor }
+                  ? { backgroundColor: commonStyles.colors.rosaPrincipal }
                   : isBlue[0].color || isBlue[1].color !== undefined
                   ? { backgroundColor: commonStyles.colors.azulPrincipal }
                   : { backgroundColor: commonStyles.colors.brancoPrincipal },
-                route.name === "Home" || route.name === "Menu"
+                route.name === "index" || route.name === "menuProfile"
                   ? styles.smallBtn
                   : styles.largeBtn,
+                { justifyContent: "center", alignItems: "center" },
               ]}
             >
               <FontAwesome
                 name={
-                  route.name === "Home"
+                  route.name === "index"
                     ? "home"
-                    : route.name === "AddService"
+                    : route.name === "addService"
                     ? "plus"
                     : "user"
                 }
                 size={25}
                 color={
                   isFocused
-                    ? btnFocus.color
+                    ? commonStyles.colors.brancoPrincipal
                     : isBlue[0].color || isBlue[1].color !== undefined
-                    ? btnNotFocus.color
+                    ? commonStyles.colors.brancoPrincipal
                     : commonStyles.colors.azulPrincipal
                 }
               />
             </View>
-
             <Text style={[isBlue, styles.label]}>
-              {label !== "AddService" ? label : ""}
+              {label !== "addService" ? label : ""}
             </Text>
           </TouchableOpacity>
         );
@@ -132,13 +116,18 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
 }
 
 const styles = StyleSheet.create({
+  tabBar: {
+    width: "100%",
+    height: "12%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
   smallBtn: {
     width: 50,
     height: 50,
     padding: 5,
     borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
     position: "relative",
     bottom: 32,
   },
@@ -147,13 +136,11 @@ const styles = StyleSheet.create({
     height: 65,
     padding: 5,
     borderRadius: 35,
-    justifyContent: "center",
-    alignItems: "center",
     position: "relative",
     bottom: 34,
   },
   label: {
     position: "relative",
-    bottom: 20,
+    bottom: 30,
   },
 });
